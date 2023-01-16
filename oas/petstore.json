@@ -32,10 +32,22 @@
                     "$ref": "#/components/schemas/Pet"
                   },
                   {
-                    "description": "A single Pet object used to create a new Pet"
+                    "description": "A single Pet object used to create a new Pet",
+                    "examples": [
+                      {
+                        "id": 12345,
+                        "name": "Indiana",
+                        "tag": "dog"
+                      }
+                    ]
                   }
                 ],
                 "contentMediaType": "application/json"
+              },
+              "example": {
+                "id": 12345,
+                "name": "Indiana",
+                "tag": "dog"
               }
             }
           },
