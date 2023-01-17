@@ -4,9 +4,9 @@ info:
   summary: This API stores data about available pets 
   description: The API enables users to view detailed information about a specific pet store and its available pets. The API can be used by pet owners, pet adoption agencies, and anyone looking for information about pets in a particular area.
   contact: 
-    name": APIMatic,
-    url: https://www.sdks.io/contact,
-    email: support@sdks.io"
+    name": APIMatic
+    url: https://www.sdks.io/contact
+    email: support@sdks.io
   version: '1.0.0'
 jsonSchemaDialect: https://json-schema.org/draft/2020-12/schema
 servers:
