@@ -2,7 +2,12 @@
   "openapi": "3.1.0",
   "info": {
     "title": "Petstore",
-    "contact": {},
+    "description": "The API enables users to view detailed information about a specific pet store and its available pets. The API can be used by pet owners, pet adoption agencies, and anyone looking for information about pets in a particular area.",
+    "contact": {
+      "name": "APIMatic",
+      "url": "https://www.sdks.io/contact",
+      "email": "support@sdks.io"
+    },
     "version": "1.0.0"
   },
   "jsonSchemaDialect": "https://json-schema.org/draft/2020-12/schema",
@@ -19,7 +24,7 @@
           "pets"
         ],
         "summary": "createPets",
-        "description": "Create a pet",
+        "description": "Create a pet and key characteristics",
         "operationId": "createPets",
         "parameters": [],
         "requestBody": {
@@ -37,7 +42,7 @@
                       {
                         "id": 12345,
                         "name": "Indiana",
-                        "tag": "dog"
+                        "type": "dog"
                       }
                     ]
                   }
@@ -47,7 +52,7 @@
               "example": {
                 "id": 12345,
                 "name": "Indiana",
-                "tag": "dog"
+                "type": "dog"
               }
             }
           },
@@ -65,7 +70,24 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/Error"
+                  "allOf": [
+                    {
+                      "$ref": "#/components/schemas/Error"
+                    },
+                    {
+                      "examples": [
+                        {
+                          "code": 101010,
+                          "message": "Invalid pet type, only cat and dogs allowed"
+                        }
+                      ]
+                    }
+                  ],
+                  "contentMediaType": "application/json"
+                },
+                "example": {
+                  "code": 101010,
+                  "message": "Invalid pet type, only cat and dogs allowed"
                 }
               }
             }
@@ -90,7 +112,10 @@
             "schema": {
               "maximum": 100.0,
               "type": "integer",
-              "contentEncoding": "int32"
+              "contentEncoding": "int32",
+              "examples": [
+                10
+              ]
             }
           }
         ],
@@ -105,8 +130,12 @@
                     "schema": {
                       "type": "string",
                       "description": "A link to the next page of responses",
+                      "examples": [
+                        "https://api.petstore.com/v1/pets?count=2&offset=5"
+                      ],
                       "contentMediaType": "text/plain"
-                    }
+                    },
+                    "example": "https://api.petstore.com/v1/pets?count=2&offset=5"
                   }
                 }
               }
@@ -120,8 +149,34 @@
                     "$ref": "#/components/schemas/Pet"
                   },
                   "description": "",
+                  "examples": [
+                    [
+                      {
+                        "id": 12345,
+                        "name": "Indiana",
+                        "type": "dog"
+                      },
+                      {
+                        "id": 56789,
+                        "name": "Shadow",
+                        "type": "cat"
+                      }
+                    ]
+                  ],
                   "contentMediaType": "application/json"
-                }
+                },
+                "example": [
+                  {
+                    "id": 12345,
+                    "name": "Indiana",
+                    "type": "dog"
+                  },
+                  {
+                    "id": 56789,
+                    "name": "Shadow",
+                    "type": "cat"
+                  }
+                ]
               }
             }
           },
@@ -131,7 +186,24 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/Error"
+                  "allOf": [
+                    {
+                      "$ref": "#/components/schemas/Error"
+                    },
+                    {
+                      "examples": [
+                        {
+                          "code": 101010,
+                          "message": "Invalid pet type, only cat and dogs allowed"
+                        }
+                      ]
+                    }
+                  ],
+                  "contentMediaType": "application/json"
+                },
+                "example": {
+                  "code": 101010,
+                  "message": "Invalid pet type, only cat and dogs allowed"
                 }
               }
             }
@@ -157,7 +229,10 @@
             "required": true,
             "style": "simple",
             "schema": {
-              "type": "string"
+              "type": "string",
+              "examples": [
+                "33918"
+              ]
             }
           }
         ],
@@ -168,7 +243,26 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/Pet"
+                  "allOf": [
+                    {
+                      "$ref": "#/components/schemas/Pet"
+                    },
+                    {
+                      "examples": [
+                        {
+                          "id": 12345,
+                          "name": "Cody",
+                          "type": "dog"
+                        }
+                      ]
+                    }
+                  ],
+                  "contentMediaType": "application/json"
+                },
+                "example": {
+                  "id": 12345,
+                  "name": "Cody",
+                  "type": "dog"
                 }
               }
             }
@@ -179,7 +273,24 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/Error"
+                  "allOf": [
+                    {
+                      "$ref": "#/components/schemas/Error"
+                    },
+                    {
+                      "examples": [
+                        {
+                          "code": 101010,
+                          "message": "Invalid pet type, only cat and dogs allowed"
+                        }
+                      ]
+                    }
+                  ],
+                  "contentMediaType": "application/json"
+                },
+                "example": {
+                  "code": 101010,
+                  "message": "Invalid pet type, only cat and dogs allowed"
                 }
               }
             }
@@ -202,6 +313,7 @@
         "properties": {
           "id": {
             "type": "integer",
+            "description": "a unique identifier for a Pet",
             "contentEncoding": "int64",
             "examples": [
               1234
@@ -209,14 +321,22 @@
           },
           "name": {
             "type": "string",
+            "description": "the name lovingly given to the pet",
             "examples": [
               "Fido"
             ]
           },
-          "tag": {
-            "type": "string",
-            "examples": [
-              "dog"
+          "type": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/Type"
+              },
+              {
+                "description": "the type of pets allowed",
+                "examples": [
+                  "dog"
+                ]
+              }
             ]
           }
         }
@@ -231,12 +351,30 @@
         "properties": {
           "code": {
             "type": "integer",
-            "contentEncoding": "int32"
+            "contentEncoding": "int32",
+            "examples": [
+              101010
+            ]
           },
           "message": {
-            "type": "string"
+            "type": "string",
+            "examples": [
+              "Invalid pet type, only cat and dogs allowed"
+            ]
           }
         }
+      },
+      "Type": {
+        "title": "Type",
+        "enum": [
+          "dog",
+          "cat"
+        ],
+        "type": "string",
+        "description": "the type of pets allowed",
+        "examples": [
+          "dog"
+        ]
       }
     },
     "securitySchemes": {

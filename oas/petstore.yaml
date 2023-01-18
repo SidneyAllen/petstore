@@ -31,7 +31,7 @@ paths:
             example:
               id: 12345
               name: Indiana
-              tag: dog
+              type: dog
       responses:
         '201':
           description: Null response
@@ -44,6 +44,9 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/Error'
+              example:
+                code: 101010
+                message: Invalid pet type, only cat and dogs allowed
       deprecated: false
     get:
       tags:
@@ -61,6 +64,7 @@ paths:
           maximum: 100
           type: integer
           contentEncoding: int32
+        example: 10
       responses:
         '200':
           description: A paged array of pets
@@ -73,6 +77,7 @@ paths:
                     type: string
                     description: A link to the next page of responses
                     contentMediaType: text/plain
+                  example: https://api.petstore.com/v1/pets?count=2&offset=5
           content:
             application/json:
               schema:
@@ -82,6 +87,13 @@ paths:
                   $ref: '#/components/schemas/Pet'
                 description: ''
                 contentMediaType: application/json
+              example:
+                - id: 12345
+                  name: Indiana
+                  type: dog
+                - id: 56789
+                  name: Shadow
+                  type: cat
         default:
           description: unexpected error
           headers: {}
@@ -89,6 +101,9 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/Error'
+              example:
+                code: 101010
+                message: Invalid pet type, only cat and dogs allowed
       deprecated: false
     parameters: []
   /pets/{petId}:
@@ -106,6 +121,7 @@ paths:
         style: simple
         schema:
           type: string
+        example: 33918
       responses:
         '200':
           description: Expected response to a valid request
@@ -114,6 +130,10 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/Pet'
+              example:
+                id: 12345
+                name: Cody
+                type: dog
         default:
           description: unexpected error
           headers: {}
@@ -121,6 +141,9 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/Error'
+              example:
+                code: 101010
+                message: Invalid pet type, only cat and dogs allowed
       deprecated: false
     parameters: []
 components:
@@ -134,13 +157,19 @@ components:
       properties:
         id:
           type: integer
+          description: a unique identifier for a Pet
           contentEncoding: int64
           example: 1234
         name:
           type: string
+          description: the name lovingly given to the pet
           example:  Fido
-        tag:
+        type:
           type: string
+          description: the type of pets allowed
+          enum:
+          - dog
+          - cat
           example: dog
     Error:
       title: Error
@@ -152,8 +181,10 @@ components:
         code:
           type: integer
           contentEncoding: int32
+          example: 101010
         message:
           type: string
+          example: Invalid pet type, only cat and dogs allowed
   securitySchemes:
     bearerAuth:
       type: http
