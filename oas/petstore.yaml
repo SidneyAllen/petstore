@@ -31,7 +31,7 @@ paths:
             example:
               id: 12345
               name: Indiana
-              type: dog
+              petType: dog
       responses:
         '201':
           description: Null response
@@ -90,10 +90,10 @@ paths:
               example:
                 - id: 12345
                   name: Indiana
-                  type: dog
+                  petType: dog
                 - id: 56789
                   name: Shadow
-                  type: cat
+                  petType: cat
         default:
           description: unexpected error
           headers: {}
@@ -133,7 +133,7 @@ paths:
               example:
                 id: 12345
                 name: Cody
-                type: dog
+                petType: dog
         default:
           description: unexpected error
           headers: {}
@@ -164,7 +164,7 @@ components:
           type: string
           description: the name lovingly given to the pet
           example:  Fido
-        type:
+        petType:
           type: string
           description: the type of pets allowed
           enum:
