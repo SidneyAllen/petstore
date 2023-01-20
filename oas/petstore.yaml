@@ -11,9 +11,10 @@ info:
 jsonSchemaDialect: https://json-schema.org/draft/2020-12/schema
 servers:
 - url: https://src8wr32cg.api.quickmocker.com
-  variables: {}
+  description: API mocking server for demo purposes
 paths:
   /pets:
+    description: endpoints for multiple pet related actions
     post:
       tags:
       - pets
@@ -107,6 +108,7 @@ paths:
       deprecated: false
     parameters: []
   /pets/{petId}:
+    description: endpoint for a unique pet actions
     get:
       tags:
       - pets
@@ -197,4 +199,4 @@ security:
 - bearerAuth: []
 tags:
 - name: pets
-  description: 'the pet group'
+  description: 'the pet grouping'
