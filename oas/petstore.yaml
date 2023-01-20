@@ -150,6 +150,7 @@ components:
   schemas:
     Pet:
       title: Pet
+      description: A single Pet object
       required:
       - id
       - name
@@ -180,10 +181,12 @@ components:
       properties:
         code:
           type: integer
+          description: the code associated with the error returned
           contentEncoding: int32
           example: 101010
         message:
           type: string
+          description: detailed message about the error returned
           example: Invalid pet type, only cat and dogs allowed
   securitySchemes:
     bearerAuth:
@@ -194,4 +197,4 @@ security:
 - bearerAuth: []
 tags:
 - name: pets
-  description: ''
+  description: 'the pet group'
