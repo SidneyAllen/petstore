@@ -42,7 +42,7 @@
                       {
                         "id": 12345,
                         "name": "Indiana",
-                        "type": "dog"
+                        "petType": "dog"
                       }
                     ]
                   }
@@ -52,7 +52,7 @@
               "example": {
                 "id": 12345,
                 "name": "Indiana",
-                "type": "dog"
+                "petType": "dog"
               }
             }
           },
@@ -154,12 +154,12 @@
                       {
                         "id": 12345,
                         "name": "Indiana",
-                        "type": "dog"
+                        "petType": "dog"
                       },
                       {
                         "id": 56789,
                         "name": "Shadow",
-                        "type": "cat"
+                        "petType": "cat"
                       }
                     ]
                   ],
@@ -169,12 +169,12 @@
                   {
                     "id": 12345,
                     "name": "Indiana",
-                    "type": "dog"
+                    "petType": "dog"
                   },
                   {
                     "id": 56789,
                     "name": "Shadow",
-                    "type": "cat"
+                    "petType": "cat"
                   }
                 ]
               }
@@ -252,7 +252,7 @@
                         {
                           "id": 12345,
                           "name": "Cody",
-                          "type": "dog"
+                          "petType": "dog"
                         }
                       ]
                     }
@@ -262,7 +262,7 @@
                 "example": {
                   "id": 12345,
                   "name": "Cody",
-                  "type": "dog"
+                  "petType": "dog"
                 }
               }
             }
@@ -326,10 +326,10 @@
               "Fido"
             ]
           },
-          "type": {
+          "petType": {
             "allOf": [
               {
-                "$ref": "#/components/schemas/Type"
+                "$ref": "#/components/schemas/PetType"
               },
               {
                 "description": "the type of pets allowed",
@@ -364,8 +364,8 @@
           }
         }
       },
-      "Type": {
-        "title": "Type",
+      "PetType": {
+        "title": "PetType",
         "enum": [
           "dog",
           "cat"
