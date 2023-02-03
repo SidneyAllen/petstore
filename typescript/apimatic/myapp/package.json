@@ -1,0 +1,16 @@
+{
+  "name": "apimatic-sample-app",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "type": "module",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "devDependencies": {
+    "petstorelib": "file:../Petstore"  
+  },
+  "keywords": [],
+  "author": "APIMatic",
+  "license": "ISC"
+}

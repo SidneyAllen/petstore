@@ -150,19 +150,27 @@ paths:
     parameters: []
 components:
   schemas:
+
     Pet:
-      title: Pet
-      description: A single Pet object
-      required:
-      - id
-      - name
+      allOf:
+        - $ref: '#/components/schemas/NewPet'
+        - type: object
+          title: Pet
+          description: A single Pet object
+          required:
+          - id
+          properties:
+            id:
+              type: integer
+              description: a unique identifier for a Pet
+              contentEncoding: int64
+              example: 1234
+
+    NewPet:
       type: object
+      required:
+        - name  
       properties:
-        id:
-          type: integer
-          description: a unique identifier for a Pet
-          contentEncoding: int64
-          example: 1234
         name:
           type: string
           description: the name lovingly given to the pet
